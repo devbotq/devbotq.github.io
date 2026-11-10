@@ -1,337 +1,162 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- ===== Безопасность =====
-     Примечание: X-Frame-Options в <meta> браузеры игнорируют, он работает только как HTTP-заголовок сервера.
-     Защита от встраивания здесь дублируется через CSP frame-ancestors (тоже только в заголовке),
-     поэтому на проде задайте их на уровне сервера/CDN.
-     Для продакшена: скомпилируйте Tailwind (CLI) и уберите cdn.tailwindcss.com и 'unsafe-inline' из CSP. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-
-<!-- ===== SEO ===== -->
-<title>Расчёски — парикмахерская в центре города | Стрижки, уход, оформление</title>
-<meta name="description" content="Парикмахерская «Расчёски»: авторские стрижки, уход за волосами и оформление бороды. Лаконичный интерьер, сильные мастера, онлайн-запись в два клика.">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#17120f">
-<link rel="canonical" href="https://example.com/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Расчёски — парикмахерская">
-<meta property="og:description" content="Авторские стрижки и уход. Запись в два клика.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=70">
-
-<!--
-robots.txt (положить в корень сайта):
-User-agent: *
-Allow: /
-Disallow: /admin/
-Sitemap: https://example.com/sitemap.xml
-
-sitemap.xml:
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.com/</loc><lastmod>2025-01-01</lastmod><priority>1.0</priority></url>
-  <url><loc>https://example.com/#services</loc><priority>0.8</priority></url>
-  <url><loc>https://example.com/#masters</loc><priority>0.7</priority></url>
-  <url><loc>https://example.com/#booking</loc><priority>0.9</priority></url>
-</urlset>
--->
-
-<!-- Schema.org -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HairSalon",
-  "additionalType": "https://schema.org/LocalBusiness",
-  "name": "Расчёски",
-  "description": "Парикмахерская: стрижки, уход, оформление бороды.",
-  "url": "https://example.com/",
-  "telephone": "+7-999-000-00-00",
-  "priceRange": "₽₽",
-  "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=70",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "ул. Примерная, 10",
-    "addressLocality": "Москва",
-    "addressCountry": "RU"
-  },
-  "openingHoursSpecification": [{
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    "opens": "10:00",
-    "closes": "21:00"
-  }]
-}
-</script>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        bg: '#17120f', surface: '#211a16', line: '#3a2f28',
-        ink: '#efe6dc', muted: '#a39587', accent: '#c8a27a'
-      },
-      fontFamily: {
-        serif: ['"Iowan Old Style"','"Palatino Linotype"',"Palatino",'Georgia','serif'],
-        sans: ['"Helvetica Neue"','Inter','system-ui','Arial','sans-serif']
-      }
-    }
-  }
-}
-</script>
-<style>
-  html { scroll-behavior: smooth; }
-  body { background:#17120f; color:#efe6dc; }
-  ::selection { background:#c8a27a; color:#17120f; }
-  select, input { color-scheme: dark; }
-  .img-fallback { background:#2a211b; }
-  :focus-visible { outline:2px solid #c8a27a; outline-offset:3px; }
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расчёски — парикмахерская в центре города | Стрижки, уход, оформление</title>
+    <style>
+        /* Базовые стили для демонстрации, вы можете заменить их на свои оригинальные стили */
+        body { font-family: sans-serif; color: #333; line-height: 1.6; margin: 0; padding: 0; background: #fdfdfd; }
+        header, section, footer { padding: 20px; max-width: 800px; margin: 0 auto; }
+        .nav-links a { margin-right: 15px; text-decoration: none; color: #000; font-weight: bold; }
+        .btn { display: inline-block; background: #000; color: #fff; padding: 10px 20px; text-decoration: none; margin-top: 10px; border-radius: 4px; }
+        .alert { background: #fff3cd; color: #856404; padding: 10px; margin-bottom: 20px; border: 1px solid #ffeeba; border-radius: 4px; }
+        img { max-width: 100%; height: auto; display: block; margin: 15px 0; border-radius: 4px; object-fit: cover; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .master-card { margin-bottom: 30px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        select, input { width: 100%; padding: 8px; box-sizing: border-box; }
+    </style>
 </head>
+<body>
 
-<body class="font-sans antialiased bg-bg text-ink">
-
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:bg-accent focus:text-bg focus:px-4 focus:py-2 z-50">К содержимому</a>
-
-<header class="sticky top-0 z-40 bg-bg/90 backdrop-blur border-b border-line">
-  <div class="bg-surface border-b border-line">
-    <p class="max-w-7xl mx-auto px-6 py-2 text-[11px] sm:text-xs text-muted tracking-wide text-center">
-      Сайт в режиме разработки. Цены, мастера и расписание демонстрационные. Реальная запись включится при запуске
-    </p>
-  </div>
-  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="#top" class="font-serif text-2xl tracking-tight">Расчёски</a>
-    <nav aria-label="Основная навигация" class="hidden md:flex gap-10 text-sm text-muted">
-      <a class="hover:text-ink transition-colors" href="#services">Услуги</a>
-      <a class="hover:text-ink transition-colors" href="#masters">Мастера</a>
-      <a class="hover:text-ink transition-colors" href="#gallery">Работы</a>
-      <a class="hover:text-ink transition-colors" href="#booking">Запись</a>
-    </nav>
-    <a href="#booking" class="text-sm border border-accent text-accent px-5 py-2 hover:bg-accent hover:text-bg transition-colors">Записаться</a>
-  </div>
-</header>
-
-<main id="main">
-
-  <!-- HERO -->
-  <section id="top" class="max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-32 md:pb-40 grid md:grid-cols-12 gap-12 items-end">
-    <div class="md:col-span-7">
-      <p class="text-xs uppercase tracking-[0.3em] text-accent mb-8">Парикмахерская · Центр города</p>
-      <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
-        Форма, <br>которая <br><span class="text-accent italic">держится.</span>
-      </h1>
-      <p class="mt-10 max-w-md text-muted text-lg leading-relaxed">
-        Точные стрижки, спокойная атмосфера и мастера, которые слушают. Без спешки и лишних слов.
-      </p>
-      <a href="#booking" class="inline-block mt-12 bg-accent text-bg px-9 py-4 text-sm tracking-wide font-medium hover:bg-ink transition-colors">Записаться онлайн</a>
-    </div>
-    <div class="md:col-span-5">
-      <div class="aspect-[4/5] overflow-hidden img-fallback">
-        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=75"
-             alt="Интерьер салона: кресло и зеркало в тёплом свете" width="1000" height="1250"
-             class="w-full h-full object-cover grayscale-[25%]" fetchpriority="high" referrerpolicy="no-referrer">
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" class="border-t border-line">
-    <div class="max-w-7xl mx-auto px-6 py-24 md:py-36 grid md:grid-cols-12 gap-12">
-      <div class="md:col-span-4">
-        <h2 class="font-serif text-4xl md:text-5xl tracking-tight">Услуги <br>и цены</h2>
-        <p class="mt-6 text-muted max-w-xs">Цены демонстрационные. Итоговая стоимость зависит от длины и сложности работы.</p>
-      </div>
-      <div class="md:col-span-8 space-y-16">
-        <div>
-          <h3 class="text-xs uppercase tracking-[0.3em] text-accent mb-6">Стрижки</h3>
-          <ul class="divide-y divide-line border-y border-line">
-            <li class="flex justify-between py-5 gap-6"><span class="text-lg">Мужская стрижка</span><span class="font-serif text-lg whitespace-nowrap">от 2 500 ₽</span></li>
-            <li class="flex justify-between py-5 gap-6"><span class="text-lg">Женская стрижка</span><span class="font-serif text-lg whitespace-nowrap">от 3 800 ₽</span></li>
-            <li class="flex justify-between py-5 gap-6"><span class="text-lg">Детская стрижка</span><span class="font-serif text-lg whitespace-nowrap">от 1 800 ₽</span></li>
-          </ul>
+    <header>
+        <div class="alert">
+            Сайт в режиме разработки. Цены, мастера и расписание демонстрационные. Реальная запись включится при запуске.
         </div>
-        <div>
-          <h3 class="text-xs uppercase tracking-[0.3em] text-accent mb-6">Уход</h3>
-          <ul class="divide-y divide-line border-y border-line">
-            <li class="flex justify-between py-5 gap-6"><span class="text-lg">Глубокое восстановление</span><span class="font-serif text-lg whitespace-nowrap">от 3 000 ₽</span></li>
-            <li class="flex justify-between py-5 gap-6"><span class="text-lg">Уход за кожей головы</span><span class="font-serif text-lg whitespace-nowrap">от 2 200 ₽</span></li>
-          </ul>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Расчёски</h2>
+            <nav class="nav-links">
+                <a href="#services">Услуги</a>
+                <a href="#masters">Мастера</a>
+                <a href="#works">Работы</a>
+                <a href="#booking">Запись</a>
+            </nav>
+            <a href="#booking" class="btn" style="margin-top: 0;">Записаться</a>
         </div>
-        <div>
-          <h3 class="text-xs uppercase tracking-[0.3em] text-accent mb-6">Оформление</h3>
-          <ul class="divide-y divide-line border-y border-line">
-            <li class="flex justify-between py-5 gap-6"><span class="text-lg">Моделирование бороды</span><span class="font-serif text-lg whitespace-nowrap">от 1 800 ₽</span></li>
-            <li class="flex justify-between py-5 gap-6"><span class="text-lg">Укладка</span><span class="font-serif text-lg whitespace-nowrap">от 1 500 ₽</span></li>
-          </ul>
+    </header>
+
+    <main>
+        <section id="hero">
+            <p style="text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 5px;">Парикмахерская · Центр города</p>
+            <h1>Форма, которая держится.</h1>
+            <p>Точные стрижки, спокойная атмосфера и мастера, которые слушают. Без спешки и лишних слов.</p>
+            <a href="#booking" class="btn">Записаться онлайн</a>
+            <!-- Главное фото интерьера -->
+            <img src="https://unsplash.com" alt="Интерьер салона: кресло и зеркало в тёплом свете">
+        </section>
+
+        <section id="services">
+            <h2>Услуги и цены</h2>
+            <p style="color: #666; font-style: italic;">Цены демонстрационные. Итоговая стоимость зависит от длины и сложности работы.</p>
+            
+            <h3>Стрижки</h3>
+            <ul>
+                <li>Мужская стрижка — от 2 500 ₽</li>
+                <li>Женская стрижка — от 3 800 ₽</li>
+                <li>Детская стрижка — от 1 800 ₽</li>
+            </ul>
+
+            <h3>Уход</h3>
+            <ul>
+                <li>Глубокое восстановление — от 3 000 ₽</li>
+                <li>Уход за кожей головы — от 2 200 ₽</li>
+            </ul>
+
+            <h3>Оформление</h3>
+            <ul>
+                <li>Моделирование бороды — от 1 800 ₽</li>
+                <li>Укладка — от 1 500 ₽</li>
+            </ul>
+        </section>
+
+        <section id="masters">
+            <h2>Мастера</h2>
+            
+            <div class="master-card">
+                <!-- Фото Артёма -->
+                <img src="https://unsplash.com" alt="Барбер за работой — демонстрационный мастер Артём">
+                <h3>Артём Волков</h3>
+                <p style="color: #666;">Барбер · 9 лет опыта</p>
+            </div>
+
+            <div class="master-card">
+                <!-- Фото Марии -->
+                <img src="https://unsplash.com" alt="Стилист-парикмахер — демонстрационный мастер Мария">
+                <h3>Мария Лис</h3>
+                <p style="color: #666;">Стилист · 12 лет опыта</p>
+            </div>
+        </section>
+
+        <section id="works">
+            <h2>Работы</h2>
+            <div class="gallery">
+                <!-- Фото работ салона -->
+                <img src="https://unsplash.com" alt="Результат женской стрижки">
+                <img src="https://unsplash.com" alt="Мужская стрижка и борода">
+                <img src="https://unsplash.com" alt="Детали работы барбера">
+            </div>
+        </section>
+
+        <section id="booking">
+            <h2>Запись в два клика</h2>
+            <p>Выберите услугу, мастера и дату — мы подготовим сообщение, вам останется отправить его в WhatsApp. Без регистрации.</p>
+            
+            <form onsubmit="return false;">
+                <div class="form-group">
+                    <label>Услуга</label>
+                    <select>
+                        <option>Мужская стрижка — от 2 500 ₽</option>
+                        <option>Женская стрижка — от 3 800 ₽</option>
+                        <option>Детская стрижка — от 1 800 ₽</option>
+                        <option>Глубокое восстановление — от 3 000 ₽</option>
+                        <option>Уход за кожей головы — от 2 200 ₽</option>
+                        <option>Моделирование бороды — от 1 800 ₽</option>
+                        <option>Укладка — от 1 500 ₽</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Мастер</label>
+                    <select>
+                        <option>Артём Волков</option>
+                        <option>Мария Лис</option>
+                        <option>Любой свободный</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Дата</label>
+                    <input type="date">
+                </div>
+
+                <div class="form-group">
+                    <label>Время</label>
+                    <input type="time" value="12:00">
+                </div>
+
+                <div class="form-group">
+                    <label>Имя (необязательно)</label>
+                    <input type="text" placeholder="Ваше имя">
+                </div>
+
+                <button class="btn" style="border: none; cursor: pointer; width: 100%;">Отправить в WhatsApp</button>
+            </form>
+            <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Это демо: сообщение откроется в WhatsApp на тестовый номер.</p>
+        </section>
+    </main>
+
+    <footer style="background: #111; color: #fff; margin-top: 5px; padding: 40px 20px;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h3>Расчёски</h3>
+            <p>Парикмахерская</p>
+            <p>ул. Примерная, 10</p>
+            <p>Ежедневно 10:00–21:00</p>
+            <p>+7 999 000-00-00</p>
+            <p style="color: #666; margin-top: 30px; font-size: 0.8em;">&copy; 2025 Расчёски. Демонстрационная версия.</p>
         </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- MASTERS -->
-  <section id="masters" class="bg-surface border-y border-line">
-    <div class="max-w-7xl mx-auto px-6 py-24 md:py-36">
-      <h2 class="font-serif text-4xl md:text-5xl tracking-tight">Мастера</h2>
-      <div class="mt-16 grid sm:grid-cols-2 gap-10 lg:gap-20 max-w-4xl">
-        <article>
-          <div class="aspect-[3/4] overflow-hidden img-fallback">
-            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=75"
-                 alt="Барбер за работой — демонстрационный мастер Артём" width="800" height="1067" loading="lazy"
-                 class="w-full h-full object-cover grayscale-[25%]" referrerpolicy="no-referrer">
-          </div>
-          <h3 class="font-serif text-2xl mt-6">Артём Волков</h3>
-          <p class="text-muted mt-1">Барбер · 9 лет опыта</p>
-        </article>
-        <article class="sm:mt-20">
-          <div class="aspect-[3/4] overflow-hidden img-fallback">
-            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=75"
-                 alt="Стилист-парикмахер — демонстрационный мастер Мария" width="800" height="1067" loading="lazy"
-                 class="w-full h-full object-cover grayscale-[25%]" referrerpolicy="no-referrer">
-          </div>
-          <h3 class="font-serif text-2xl mt-6">Мария Лис</h3>
-          <p class="text-muted mt-1">Стилист · 12 лет опыта</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery" class="max-w-7xl mx-auto px-6 py-24 md:py-36">
-    <h2 class="font-serif text-4xl md:text-5xl tracking-tight">Работы</h2>
-    <div class="mt-16 grid grid-cols-6 gap-4 md:gap-6">
-      <figure class="col-span-6 md:col-span-4 aspect-[16/10] overflow-hidden img-fallback">
-        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1400&q=75"
-             alt="Результат женской стрижки" width="1400" height="875" loading="lazy"
-             class="w-full h-full object-cover grayscale-[25%]" referrerpolicy="no-referrer">
-      </figure>
-      <figure class="col-span-3 md:col-span-2 aspect-[3/4] overflow-hidden img-fallback">
-        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=800&q=75"
-             alt="Мужская стрижка и борода" width="800" height="1067" loading="lazy"
-             class="w-full h-full object-cover grayscale-[25%]" referrerpolicy="no-referrer">
-      </figure>
-      <figure class="col-span-3 md:col-span-2 md:col-start-3 aspect-square overflow-hidden img-fallback">
-        <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=75"
-             alt="Детали работы барбера" width="800" height="800" loading="lazy"
-             class="w-full h-full object-cover grayscale-[25%]" referrerpolicy="no-referrer">
-      </figure>
-    </div>
-  </section>
-
-  <!-- BOOKING -->
-  <section id="booking" class="bg-surface border-t border-line">
-    <div class="max-w-7xl mx-auto px-6 py-24 md:py-36 grid md:grid-cols-12 gap-12">
-      <div class="md:col-span-5">
-        <h2 class="font-serif text-4xl md:text-5xl tracking-tight">Запись <br>в два клика</h2>
-        <p class="mt-6 text-muted max-w-sm">Выберите услугу, мастера и дату — мы подготовим сообщение, вам останется отправить его в WhatsApp. Без регистрации.</p>
-      </div>
-      <form id="bookingForm" class="md:col-span-7 grid gap-8" novalidate>
-        <div>
-          <label for="service" class="block text-xs uppercase tracking-[0.25em] text-accent mb-3">Услуга</label>
-          <select id="service" name="service" required class="w-full bg-bg border border-line px-4 py-4 text-ink">
-            <option value="Мужская стрижка">Мужская стрижка — от 2 500 ₽</option>
-            <option value="Женская стрижка">Женская стрижка — от 3 800 ₽</option>
-            <option value="Детская стрижка">Детская стрижка — от 1 800 ₽</option>
-            <option value="Глубокое восстановление">Глубокое восстановление — от 3 000 ₽</option>
-            <option value="Уход за кожей головы">Уход за кожей головы — от 2 200 ₽</option>
-            <option value="Моделирование бороды">Моделирование бороды — от 1 800 ₽</option>
-            <option value="Укладка">Укладка — от 1 500 ₽</option>
-          </select>
-        </div>
-        <div>
-          <label for="master" class="block text-xs uppercase tracking-[0.25em] text-accent mb-3">Мастер</label>
-          <select id="master" name="master" required class="w-full bg-bg border border-line px-4 py-4 text-ink">
-            <option value="Артём Волков">Артём Волков</option>
-            <option value="Мария Лис">Мария Лис</option>
-            <option value="Любой свободный мастер">Любой свободный</option>
-          </select>
-        </div>
-        <div class="grid sm:grid-cols-2 gap-8">
-          <div>
-            <label for="date" class="block text-xs uppercase tracking-[0.25em] text-accent mb-3">Дата</label>
-            <input id="date" name="date" type="date" required class="w-full bg-bg border border-line px-4 py-4 text-ink">
-          </div>
-          <div>
-            <label for="time" class="block text-xs uppercase tracking-[0.25em] text-accent mb-3">Время</label>
-            <input id="time" name="time" type="time" min="10:00" max="20:00" step="1800" value="12:00" required class="w-full bg-bg border border-line px-4 py-4 text-ink">
-          </div>
-        </div>
-        <div>
-          <label for="name" class="block text-xs uppercase tracking-[0.25em] text-accent mb-3">Имя <span class="normal-case tracking-normal text-muted">(необязательно)</span></label>
-          <input id="name" name="name" type="text" maxlength="40" autocomplete="given-name" class="w-full bg-bg border border-line px-4 py-4 text-ink">
-        </div>
-        <p id="formError" role="alert" class="text-sm text-[#d98c7a] hidden">Пожалуйста, выберите дату и время.</p>
-        <button type="submit" class="bg-accent text-bg py-4 px-9 text-sm font-medium tracking-wide hover:bg-ink transition-colors justify-self-start">
-          Отправить в WhatsApp
-        </button>
-        <p class="text-xs text-muted">Это демо: сообщение откроется в WhatsApp на тестовый номер.</p>
-      </form>
-    </div>
-  </section>
-</main>
-
-<footer class="border-t border-line">
-  <div class="max-w-7xl mx-auto px-6 py-16 grid sm:grid-cols-3 gap-10 text-sm text-muted">
-    <div>
-      <p class="font-serif text-2xl text-ink">Расчёски</p>
-      <p class="mt-3">Парикмахерская</p>
-    </div>
-    <address class="not-italic leading-relaxed">
-      ул. Примерная, 10<br>Ежедневно 10:00–21:00<br>
-      <a href="tel:+79990000000" class="hover:text-ink">+7 999 000-00-00</a>
-    </address>
-    <p class="sm:text-right">© <span id="year">2025</span> Расчёски. Демонстрационная версия.</p>
-  </div>
-</footer>
-
-<script>
-(function () {
-  'use strict';
-  var PHONE = '79990000000'; // демо-номер: замените на реальный (без «+»)
-  var form = document.getElementById('bookingForm');
-  var date = document.getElementById('date');
-  var err = document.getElementById('formError');
-
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Минимальная дата — сегодня (локальная)
-  var d = new Date();
-  var iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  date.min = iso;
-  date.value = iso;
-
-  function clean(s) { return String(s || '').replace(/[\r\n\t]+/g, ' ').trim().slice(0, 60); }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var f = new FormData(form);
-    var dateVal = f.get('date'), timeVal = f.get('time');
-    if (!dateVal || !timeVal) { err.classList.remove('hidden'); return; }
-    err.classList.add('hidden');
-
-    var parts = String(dateVal).split('-');
-    var prettyDate = parts[2] + '.' + parts[1] + '.' + parts[0];
-    var name = clean(f.get('name'));
-
-    var text = 'Здравствуйте!' + (name ? ' Меня зовут ' + name + '.' : '') +
-      ' Хочу записаться в «Расчёски».\n' +
-      'Услуга: ' + clean(f.get('service')) + '\n' +
-      'Мастер: ' + clean(f.get('master')) + '\n' +
-      'Дата: ' + prettyDate + '\n' +
-      'Время: ' + clean(timeVal) + '\n' +
-      'Подтвердите, пожалуйста, запись.';
-
-    var url = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text);
-    window.open(url, '_blank', 'noopener,noreferrer');
-  });
-})();
-</script>
 </body>
 </html>
